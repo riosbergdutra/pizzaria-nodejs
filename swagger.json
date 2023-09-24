@@ -1,0 +1,87 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API de Pedidos de Pizzaria",
+    "version": "1.0.0",
+    "description": "Uma API para gerenciar pedidos de uma pizzaria."
+  },
+  "paths": {
+    "/api/pedidos": {
+      "get": {
+        "summary": "Listar todos os pedidos",
+        "responses": {
+          "200": {
+            "description": "Lista de pedidos",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "ID do pedido"
+                  },
+                  "descricao": {
+                    "type": "string",
+                    "description": "Descrição do pedido"
+                  },
+                  "preco": {
+                    "type": "number",
+                    "description": "Preço do pedido"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro na solicitação"
+          }
+        }
+      },
+      "post": {
+        "summary": "Criar um novo pedido",
+        "parameters": [
+          {
+            "name": "pedido",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "descricao": {
+                  "type": "string",
+                  "description": "Descrição do pedido"
+                },
+                "preco": {
+                  "type": "number",
+                  "description": "Preço do pedido"
+                }
+              },
+              "example": {
+                "descricao": "Pizza Margherita",
+                "preco": 12.99
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Pedido criado com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "ID do pedido criado"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro na solicitação"
+          }
+        }
+      }
+    }
+  }
+}
