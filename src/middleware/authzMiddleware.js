@@ -1,17 +1,15 @@
 const jwt = require('jsonwebtoken');
-const secretKey = 'chave_secreta'; 
+const segredo = 'seu_segredo_secreto';
 
-module.exports = (req, res, next) => {
-  const token = req.header('Authorization');
-  if (!token) {
-    return res.status(401).json({ message: 'Acesso não autorizado. Token não fornecido.' });
-  }
+function gerarToken(pedido) {
+  const payload = {
+    pedidoId: pedido._id,
+    numeroPedido: pedido.numeroPedido,
+  };
 
-  try {
-    const decoded = jwt.verify(token, secretKey);
-    req.user = decoded.user;
-    next();
-  } catch (err) {
-    res.status(401).json({ message: 'Token inválido.' });
-  }
-};
+  const token = jwt.sign(payload, segredo, { expiresIn: '1h' });
+
+  return token;
+}
+
+module.exports = gerarToken;
