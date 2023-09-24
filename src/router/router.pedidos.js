@@ -10,6 +10,15 @@ router.get('/', async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+router.get('/:id', async (req, res) => {
+  try {
+    const pedido = await pedidoService.getPedidoById(req.params.id);
+    res.json(pedido);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 
 router.post('/', async (req, res) => {
   try {
@@ -20,14 +29,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.get('/:id', async (req, res) => {
-  try {
-    const pedido = await pedidoService.getPedidoById(req.params.id);
-    res.json(pedido);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
+
 
 router.put('/:id', async (req, res) => {
   try {
@@ -37,6 +39,7 @@ router.put('/:id', async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
+
 
 router.delete('/:id', async (req, res) => {
   try {
