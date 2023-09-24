@@ -1,4 +1,4 @@
-const Pedido = require('../models/pedido');
+const Pedido = require('../model/pedidos');
 
 const listAllPedidos = async () => {
   try {
